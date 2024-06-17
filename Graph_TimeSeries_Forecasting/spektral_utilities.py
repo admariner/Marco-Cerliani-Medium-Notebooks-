@@ -21,11 +21,7 @@ def transpose(a, perm=None, name=None):
     :param name: name for the operation.
     :return: Tensor or SparseTensor with rank k.
     """
-    if K.is_sparse(a):
-        transpose_op = tf.sparse.transpose
-    else:
-        transpose_op = tf.transpose
-
+    transpose_op = tf.sparse.transpose if K.is_sparse(a) else tf.transpose
     if perm is None:
         perm = (1, 0)  # Make explicit so that shape will always be preserved
     return transpose_op(a, perm=perm, name=name)
@@ -39,11 +35,7 @@ def reshape(a, shape=None, name=None):
     :param name: name for the operation.
     :return: Tensor or SparseTensor.
     """
-    if K.is_sparse(a):
-        reshape_op = tf.sparse.reshape
-    else:
-        reshape_op = tf.reshape
-
+    reshape_op = tf.sparse.reshape if K.is_sparse(a) else tf.reshape
     return reshape_op(a, shape=shape, name=name)
 
 
@@ -80,7 +72,7 @@ def filter_dot(fltr, features):
     :return: the filtered features.
     """
     mode = autodetect_mode(fltr, features)
-    if mode == SINGLE or mode == BATCH:
+    if mode in [SINGLE, BATCH]:
         return dot(fltr, features)
     else:
         # Mixed mode
@@ -105,10 +97,7 @@ def dot(a, b, transpose_a=False, transpose_b=False):
     if b_is_sparse_tensor:
         b = tfsp.CSRSparseMatrix(b)
     out = tfsp.matmul(a, b, transpose_a=transpose_a, transpose_b=transpose_b)
-    if hasattr(out, 'to_sparse_tensor'):
-        return out.to_sparse_tensor()
-
-    return out
+    return out.to_sparse_tensor() if hasattr(out, 'to_sparse_tensor') else out
 
 
 def mixed_mode_dot(a, b):
@@ -140,11 +129,7 @@ def degree_power(A, k):
     """
     degrees = np.power(np.array(A.sum(1)), k).flatten()
     degrees[np.isinf(degrees)] = 0.
-    if sp.issparse(A):
-        D = sp.diags(degrees)
-    else:
-        D = np.diag(degrees)
-    return D
+    return sp.diags(degrees) if sp.issparse(A) else np.diag(degrees)
 
 
 def normalized_adjacency(A, symmetric=True):
@@ -157,11 +142,10 @@ def normalized_adjacency(A, symmetric=True):
     """
     if symmetric:
         normalized_D = degree_power(A, -0.5)
-        output = normalized_D.dot(A).dot(normalized_D)
+        return normalized_D.dot(A).dot(normalized_D)
     else:
         normalized_D = degree_power(A, -1.)
-        output = normalized_D.dot(A)
-    return output
+        return normalized_D.dot(A)
 
 
 def localpooling_filter(A, symmetric=True):
