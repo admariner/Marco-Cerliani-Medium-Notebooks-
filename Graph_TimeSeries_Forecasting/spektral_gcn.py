@@ -95,8 +95,7 @@ class GraphConv(Layer):
 
     def compute_output_shape(self, input_shape):
         features_shape = input_shape[0]
-        output_shape = features_shape[:-1] + (self.channels,)
-        return output_shape
+        return features_shape[:-1] + (self.channels,)
 
     def get_config(self):
         config = {
