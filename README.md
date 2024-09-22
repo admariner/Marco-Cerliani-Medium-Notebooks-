@@ -6,6 +6,7 @@ To be notified every time a new post is published, **SUBSCRIBE [HERE](https://me
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/cerlymarco)
 
 ## Posts ordered by most recent publishing date
+- Proxy SHAP: Speed Up Explainability with Simpler Models [[post](https://medium.com/towards-data-science/proxy-shap-speed-up-explainability-with-simpler-models-1aab91b79f9f)][[code](https://github.com/cerlymarco/MEDIUM_NoteBook/tree/master/Proxy_SHAP)]
 - Time Series Forecasting in the Age of GenAI: Make Gradient Boosting Behaves like LLMs [[post](https://medium.com/towards-data-science/time-series-forecasting-in-the-age-of-genai-make-gradient-boosting-behaves-like-llms-674d9e22e1ce)][[code](https://github.com/cerlymarco/MEDIUM_NoteBook/tree/master/TimeSeries_TransferLearning)]
 - Hitchhiker’s Guide to MLOps for Time Series Forecasting with Sklearn [[post](https://medium.com/towards-data-science/hitchhikers-guide-to-mlops-for-time-series-forecasting-with-sklearn-d5d9728095a7)]|[[code](https://github.com/cerlymarco/MEDIUM_NoteBook/tree/master/TimeSeries_TransferLearning)]
 - Hitting Time Forecasting: The Other Way for Time Series Probabilistic Forecasting [[post](https://medium.com/towards-data-science/hitting-time-forecasting-the-other-way-for-time-series-probabilistic-forecasting-6c3b6496c353)]|[[code](https://github.com/cerlymarco/MEDIUM_NoteBook/tree/master/Hit_Time_Forecasting)]
